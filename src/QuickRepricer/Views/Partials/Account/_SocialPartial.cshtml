@@ -1,0 +1,38 @@
+﻿@model LoginViewModel
+@inject SignInManager<ApplicationUser> SignInManager
+
+<div class="col m2 l2 hide-on-small-only">
+    <div class="or">
+        <div class="or-line"></div>
+        <textarea class="or-label white" name="ortext">Or</textarea>
+    </div>
+</div>
+<div class="col s12 m5 l5">
+    @{
+        var loginProviders = SignInManager.GetExternalAuthenticationSchemes().ToList();
+        if (loginProviders.Count == 0)
+        {
+            <div>
+                <p>
+                    There are no external authentication services configured. See <a href="http://go.microsoft.com/fwlink/?LinkID=532715">this article</a>
+                    for details on setting up this ASP.NET application to support logging in via external services.
+                </p>
+            </div>
+        }
+        else
+        {
+            <form asp-controller="Account" asp-action="ExternalLogin" asp-route-returnurl="@ViewData["ReturnUrl"]" method="post">
+                <div class="social-wrap">
+                    @foreach (var provider in loginProviders)
+                    {
+                        <button type="submit" class="@provider.AuthenticationScheme.ToLower()"
+                                name="provider" value="@provider.AuthenticationScheme"
+                                title="Sign up using your @provider.DisplayName account">
+                           @ViewData["SocialText"] @provider.AuthenticationScheme
+                        </button>
+                    }
+                </div>
+            </form>
+        }
+    }
+</div>

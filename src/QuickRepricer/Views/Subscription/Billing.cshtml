@@ -1,0 +1,135 @@
+﻿@model BillingViewModel
+
+@{
+    ViewData["Title"] = "Billing";
+}
+
+<div class="container">
+    <div class="row">
+        <div class="col s12 m6 l6">
+            <h3>Billing Information</h3>
+        </div>
+    </div>
+
+    <div class="row">
+       
+        <div class="col s12 m5 l5">
+            <form method="post" asp-controller="Subscription"
+                  asp-action="Billing"
+                  asp-route-returnurl="@ViewData["ReturnUrl"]"
+                  id="payment-form" class="cardInfo" role="form">
+
+                <div asp-validation-summary="All"></div>
+
+                <div class="row">
+                    <div class="col"><label><strong>Accepted:</strong></label></div>
+                    <div class="col s12 m12 l12 card-images">
+                        <img src="~/images/cards/visa.png" alt="visa" />
+                        <img src="~/images/cards/mastercard.png" alt="mastercard" />
+                        <img src="~/images/cards/amex.png" alt="amex" />
+                        <img src="~/images/cards/diners.png" alt="diners" />
+                    </div>
+                    <div class="input-field col s12 m12 l12">
+                        <input id="cc-number" data-stripe="number" class="cc-number" type="tel" placeholder="•••• •••• •••• ••••" autocomplete="on" required autofocus />
+                        <label for="cc-number"><strong>Card Number:</strong></label>
+                    </div>
+
+                    <div class="input-field col s12 m12 l12">
+                        <input id="cc-exp" data-stripe="exp" type="tel" class="cc-exp" placeholder="MM / YY" required>
+                        <label for="cc-exp"><strong>Expires:</strong></label>
+                    </div>
+                    <div class="input-field col s12 m12 l12">
+                        <input id="cc-cvc" data-stripe="cvc" type="tel" class="cc-cvc" autocomplete="off" placeholder="•••" required>
+                        <label for="cc-cvc"><strong>CVC:</strong></label>
+                    </div>
+                </div>
+                <input asp-for="StripePublishableKey" type="hidden" />
+                <input asp-for="Plan.Id" type="hidden" />
+
+                <div>
+                    <a asp-controller="Subscription" asp-action="Index" class="btn waves-effect waves-light blue-grey lighten-4 black-text">Cancel</a>
+                    <button class="btn waves-effect waves-light green" type="submit" name="action">
+                        Submit
+                    </button>
+                </div>
+
+                <p class="payment-errors red-text" style="display:none;"></p>
+            </form>
+        </div>
+    </div>
+
+
+</div>
+
+@section scripts {
+
+    @{ await Html.RenderPartialAsync("_ValidationScriptsPartial"); }
+
+    <script type="text/javascript" src="https://js.stripe.com/v2/"></script>
+
+    <environment names="Development">
+        <script type="text/javascript" src="~/js/payment/jquery.payment.js"></script>
+        <script type="text/javascript" src="~/js/payment/payment-validations.js"></script>
+    </environment>
+
+    <environment names="Staging,Production">
+        <script type="text/javascript" src="~/js/payment/jquery.payment.min.js"></script>
+        <script type="text/javascript" src="~/js/payment/payment-validations.min.js"></script>
+    </environment>
+       
+    <script type="text/javascript">
+        Stripe.setPublishableKey("@Model.StripePublishableKey");
+
+        var stripeResponseHandler = function (status, response) {
+            var $form = $('#payment-form');
+
+            if (response.error) {
+                // Show the errors on the form
+                $paymentErrors = $form.find('.payment-errors');
+                $paymentErrors.text(response.error.message);
+                $paymentErrors.toggle($paymentErrors.text.length > 0);
+
+                $form.find('button').prop('disabled', false);
+            } else {
+                // token contains id, last4, and card type
+                var token = response.id;
+                // Insert the token into the form so it gets submitted to the server
+                $form.append($('<input type="hidden" name="stripeToken" />').val(token));
+                // and re-submit
+                $form.get(0).submit();
+            }
+        };
+
+        jQuery(function ($) {
+
+            $('[data-toggle="tooltip"]').tooltip();
+
+            $('#payment-form').submit(function (e) {
+                e.preventDefault();
+                var $form = $(this);
+
+
+                $form.validate({
+                    errorPlacement: function (error, element) { }
+                });
+                if (!$form.valid()) { return; }
+
+                // Disable the submit button to prevent repeated clicks
+                $form.find('button').prop('disabled', true);
+
+                //can't do this because month and year are combined in one field
+                //Stripe.card.createToken($form, stripeResponseHandler);
+
+                expiration = $('.cc-exp').payment('cardExpiryVal');
+                Stripe.card.createToken({
+                    number: $('.cc-number').val(),
+                    cvc: $('.cc-cvc').val(),
+                    exp_month: (expiration.month || 0),
+                    exp_year: (expiration.year || 0)
+                }, stripeResponseHandler);
+
+            });
+        });
+    </script>
+}
+

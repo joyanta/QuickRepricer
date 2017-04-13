@@ -1,0 +1,2 @@
+///<binding BeforeBuild='Clean output files' AfterBuild='Update all files' />
+produceoutput=false

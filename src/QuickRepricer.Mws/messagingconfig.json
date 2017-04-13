@@ -1,0 +1,68 @@
+﻿{
+  "MessagingConfiguration": {
+    "DefaultMessageQueueName": "ZeroMQ",
+    "MessageQueues": [
+      {
+        "Name": "ZeroMQ",
+        "Type": "QuickRepricer.Messaging.Impl.ZeroMq.ZeroMqMessageQueue, QuickRepricer.Messaging",
+        "Queues": [
+          {
+            "Name": "subscribe",
+            "Address": "tcp://127.0.0.1:5555"
+          },
+          {
+            "Name": "unsubscribe",
+            "Address": "tcp://127.0.0.1:5556"
+          },
+          {
+            "Name": "repriced-event",
+            "Address": "tcp://localhost:12345"
+          },
+          {
+            "Name": "repriced",
+            "Address": "tcp://localhost:12345"
+          },
+          {
+            "Name": "reprice",
+            "Address": "tcp://127.0.0.1:5557"
+          }
+        ]
+      },
+      {
+        "Name": "Azure",
+        "Type": "QuickRepricer.Messaging.Impl.Azure.ServiceBusMessageQueue, QuickRepricer.Messaging",
+        "Properties": [
+          {
+            "Name": "connectionstring",
+            "Value": "YOUR-CONNECTION-STRING"
+          }
+        ],
+        "Queues": [
+          {
+            "Name": "subscribe",
+            "Address": ""
+          },
+          {
+            "Name": "unsubscribe",
+            "Address": ""
+          }
+        ]
+      }
+    ],
+
+    "Messages": [
+      {
+        "Name": "subscribe",
+        "MessageQueueName": "ZeroMQ"
+      },
+      {
+        "Name": "unsubscribe",
+        "MessageQueueName": "ZeroMQ"
+      },
+      {
+        "Name": "reprice",
+        "MessageQueueName": "ZeroMQ"
+      }
+    ]
+  }
+}

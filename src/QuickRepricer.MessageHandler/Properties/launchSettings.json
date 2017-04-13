@@ -1,0 +1,8 @@
+{
+  "profiles": {
+    "QuickRepricer.MessageHandler": {
+      "commandName": "Project",
+      "commandLineArgs": "reprice"
+    }
+  }
+}

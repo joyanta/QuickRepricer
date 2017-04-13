@@ -1,0 +1,63 @@
+﻿@model LoginViewModel
+
+@{
+    ViewData["Title"] = "Login";
+    ViewData["SocialText"] = "Sign in with";
+}
+
+<div class="container">
+    <div class="row">
+        <div class="col s12 m6 l6">
+            <h4>Log in</h4>
+        </div>
+        <div class="col s12 m6 l6">
+        </div>
+    </div>
+    
+    <div class="row">
+        <div class="col s12 m5 l5">
+            <form asp-controller="Account" asp-action="Login" asp-route-returnurl="@ViewData["ReturnUrl"]" method="post">
+                <span asp-validation-summary="ModelOnly"></span>
+                <div class="row">
+                    <div class="input-field col s12 m12 l12">
+                        <i class="material-icons prefix">email</i>
+                        <input id="email" type="email" class="validate" asp-for="Email" />
+                        <label for="email" asp-for="Email">Email</label>
+                        <span asp-validation-for="Email"></span>
+                    </div>
+                    <div class="input-field col s12 m12 l12">
+                        <i class="material-icons prefix">lock</i>
+                        <input id="password" type="password" class="validate" asp-for="Password" />
+                        <label for="password" asp-for="Password">Password</label>
+                        <span asp-validation-for="Password"></span>
+                    </div>
+                    <div class="input-field col s12 m12 l12">
+                        <input type="checkbox" id="remember-me" asp-for="RememberMe" />
+                        <label for="remember-me" asp-for="RememberMe">Remember me</label>
+                    </div>
+                </div>
+
+                <div>
+                    <br />
+                    <a asp-controller="App" asp-action="Index" class="btn waves-effect waves-light blue-grey lighten-4 black-text">Cancel</a>
+                    <button class="btn waves-effect waves-light green" type="submit" name="action">Login</button>
+                </div>
+            </form>
+
+            <div class="row">
+                <div class="input-field col s12 m12 l12">
+                    <a asp-controller="Account" asp-action="ForgotPassword">Forgot password?</a>
+                </div>
+                <div class="input-field col s12 m12 l12">
+                    <a asp-controller="Subscription" asp-action="Index">Register as a new user</a>
+                </div>
+            </div>
+        </div>
+        @await Html.PartialAsync("_SocialPartial", ViewData)
+
+    </div>
+</div>
+
+@section scripts {
+    @{ await Html.RenderPartialAsync("_ValidationScriptsPartial"); }
+}

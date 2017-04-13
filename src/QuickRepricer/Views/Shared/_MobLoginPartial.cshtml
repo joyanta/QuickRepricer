@@ -1,0 +1,39 @@
+﻿@inject SignInManager<ApplicationUser> SignInManager
+@inject UserManager<ApplicationUser> UserManager
+
+
+@if (SignInManager.IsSignedIn(User))
+{
+    <li>
+        <ul class="collapsible collapsible-accordion">
+            <li>
+                <a class="collapsible-header waves-effect waves-teal">@UserManager.GetUserName(User)<i class="material-icons right">arrow_drop_down</i></a>
+                <div class="collapsible-body" style="background-color:transparent">
+                    <ul>
+                        <li>
+                            <a asp-area="" asp-controller="Manage" asp-action="Index" title="Manage">
+                                Settings
+                            </a>
+                        </li>
+                        <li class="divider"></li>
+                        @using (Html.BeginForm("LogOff", "Account", FormMethod.Post, new { id = "logoutForm" }))
+                        {
+                            @Html.AntiForgeryToken()
+                            <li>                              
+                                <a href="javascript:document.getElementById('logoutForm').submit()" title="Log off">
+                                    Log off
+                                </a>
+                            </li>
+                        }
+
+                    </ul>
+                </div>
+            </li>
+        </ul>
+    </li>
+}
+else
+{
+    <li><a asp-area="" asp-controller="Account" asp-action="Login" class="btn green white-text">Login</a></li>
+    <li><a asp-area="" asp-controller="Subscription" asp-action="Index" class="btn orange white-text">Try for Free</a></li>
+}

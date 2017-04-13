@@ -1,0 +1,50 @@
+
+
+{
+  "version": "1.0.0-*",
+  "buildOptions": {
+    "emitEntryPoint": true
+  },
+
+  "dependencies": {
+    "NETStandard.Library": "1.6.1",
+
+    "System.Xml.XmlDocument": "4.3.0",
+    "System.Xml.XmlSerializer": "4.0.10",
+
+    //"Microsoft.Extensions.Configuration.Abstractions": "1.1.0-preview2-22646",
+    //"Microsoft.Extensions.Configuration": "1.1.0-preview2-22646",
+    //"Microsoft.Extensions.Configuration.FileExtensions": "1.1.0-preview2-22646",
+    //"Microsoft.Extensions.Configuration.Json": "1.1.0-preview2-22646",
+    //"Microsoft.Extensions.DependencyInjection.Abstractions": "1.1.0",
+    //"Microsoft.Extensions.DependencyInjection": "1.1.0-preview2-22646",
+    //"Microsoft.Extensions.Options.ConfigurationExtensions": "1.1.0-preview1-final",
+    //"Microsoft.Extensions.Configuration.UserSecrets": "1.1.0-preview2-22646",
+    //"Microsoft.Extensions.Configuration.EnvironmentVariables": "1.1.0-preview2-22646",
+
+
+    "Microsoft.Extensions.Configuration.Abstractions": "1.1.0",
+    "Microsoft.Extensions.Configuration": "1.1.0",
+    "Microsoft.Extensions.Configuration.FileExtensions": "1.1.0",
+    "Microsoft.Extensions.Configuration.Json": "1.1.0",
+    "Microsoft.Extensions.Configuration.UserSecrets": "1.1.0",
+    "Microsoft.Extensions.Configuration.EnvironmentVariables": "1.1.0",
+    "Microsoft.Extensions.DependencyInjection.Abstractions": "1.1.0",
+    "Microsoft.Extensions.DependencyInjection": "1.1.0",
+    "Microsoft.Extensions.Options.ConfigurationExtensions": "1.1.0",
+
+
+    //"Microsoft.Tpl.Dataflow": "4.5.24",
+    //"HangFire": "1.6.6",
+    "RethinkDb.Driver": "2.3.15",
+    "QuickRepricer.Messaging": "1.0.0-*",
+    "QuickRepricer.Messages": "1.0.0-*",
+    "QuickRepricer.Catalogue": "1.0.0-*"
+  },
+
+  "frameworks": {
+    "net462": {
+    }
+  },
+  "userSecretsId": "aspnet-QuickRepricer.Mws-20161115110455"
+}

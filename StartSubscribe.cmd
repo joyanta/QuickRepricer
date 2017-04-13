@@ -1,0 +1,2 @@
+cd QuickRepricer.MessageHandler
+dotnet run subscribe

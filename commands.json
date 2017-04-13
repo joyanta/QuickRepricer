@@ -1,0 +1,24 @@
+{
+  "commands": {
+    "StartHandlers": {
+      "fileName": "cmd.exe",
+      "workingDirectory": ".",
+      "arguments": "/c StartHandlers.cmd"
+    },
+    "StartHandlers 118528753": {
+      "fileName": "cmd.exe",
+      "workingDirectory": ".",
+      "arguments": "/c StartHandlers.cmd"
+    },
+    "StartHandlers 462464479": {
+      "fileName": "cmd.exe",
+      "workingDirectory": ".",
+      "arguments": "/c StartHandlers.cmd"
+    },
+    "StartSetup": {
+      "fileName": "cmd.exe",
+      "workingDirectory": ".",
+      "arguments": "/c StartSetup.cmd"
+    }
+  }
+}

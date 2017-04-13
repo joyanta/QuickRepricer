@@ -1,0 +1,32 @@
+[
+  {
+    "Asim": "9493614a-c1ad-4706-94db-e795aba905e3",
+    "MerchantMaps": [
+      {
+        "MerchantSku": "jenna@gmail.com-abc",
+        "CurrentPrice": "15",
+        "Strategy": "PriceDropMarketMatchStrategy"
+      },
+      {
+        "MerchantSku": "joyanta@gmail.com-abc",
+        "CurrentPrice": "15",
+        "Strategy": "PriceDropTenPercentMarketMatchStrategy"
+      },
+      {
+        "MerchantSku": "sid@sid.com-ppp",
+        "CurrentPrice": "16",
+        "Strategy": "PriceDropMarketMatchStrategy"
+      }
+    ]
+  },
+  {
+    "Asim": "eff9c43c-e82e-4972-b9ed-846cab4d4e9c",
+    "MerchantMaps": [
+      {
+        "MerchantSku": "jenna@gmail.com-abc",
+        "CurrentPrice": "15000",
+        "Strategy": "PriceDropMarketMatchStrategy"
+      }
+    ]
+  }
+]

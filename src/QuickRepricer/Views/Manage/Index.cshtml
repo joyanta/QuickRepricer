@@ -1,0 +1,137 @@
+﻿@model IndexViewModel
+@{
+    ViewData["Title"] = "Manage your account";
+}
+
+<div class="container">
+    <div class="row">
+        <div class="col s12 m12 l6">
+            <h3>Manage Settings</h3>
+            <blockquote>
+                Your account is protected by the most advanced online security.
+                Keeping these settings up-to-date safeguards your account even more.
+            </blockquote>
+        </div>
+        <div class="col l6 hide-on-med-and-down">
+            <img src="~/images/securitysettings.png" style="margin-top:17px;" />
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col s2 m2 l1">
+            <img src="~/images/changepassword.png" />
+        </div>
+        <div class="col s10 m10 l11">
+            <div style="margin-left:20px;">
+                <p>
+                    @if (Model.HasPassword)
+                    {
+                        <a asp-controller="Manage" asp-action="ChangePassword"><strong>Change Password</strong></a>
+                    }
+                    else
+                    {
+                        <a asp-controller="Manage" asp-action="SetPassword"><strong>Create Password</strong></a>
+                    }
+                </p>
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col s2 m2 l1">
+            <img src="~/images/manageexternallogins.png" />
+        </div>
+        <div class="col s10 m10 l11">
+            <div style="margin-left:20px;">
+                <p>
+                    <a asp-controller="Manage" asp-action="ManageLogins"><strong>Manage External Logins</strong></a>
+                </p>
+            </div>
+        </div>
+    </div>
+
+    @if (Model.CustomerId != null && Model.SubscriptionId != null)
+    {
+        <div class="row">
+            <div class="col s6 m6 l6">
+                <blockquote>
+                    Currenty you are subscribed to the <strong>@Model.CurrentSubscribedPlan</strong> plan.
+                </blockquote>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col s2 m2 l1">
+                <img src="~/images/manageexternallogins.png" />
+            </div>
+
+            <div class="col s10 m10 l11">
+                <div style="margin-left:20px;">
+                    <form asp-controller="Manage" asp-action="CancelSubscription" method="post" class="form-horizontal">
+                        <div>
+                            <input asp-for="@Model.CustomerId" name="CustomerId" type="hidden" />
+                            <input asp-for="@Model.SubscriptionId" name="SubscriptionId" type="hidden" />
+                            <input asp-for="@Model.UserName" name="UserName" type="hidden" />
+                            <input type="submit" class="btn btn-default" value="Cancel current subscription" title="Remove @Model.CurrentSubscribedPlan plan" />
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    }
+
+</div>
+
+@section scripts {
+    @if (ViewData.ContainsKey("StatusMessage") && ViewData["StatusMessage"].ToString().Length > 0)
+    {
+        <script type="text/javascript">
+            $(document).ready(function () {
+                UtilityController.toast("@ViewData["StatusMessage"]");
+            });
+        </script>
+    }
+}
+
+
+@*<dt>Phone Number:</dt>
+    <dd>
+        <p>
+            Phone Numbers can used as a second factor of verification in two-factor authentication.
+            See <a href="http://go.microsoft.com/fwlink/?LinkID=532713">this article</a>
+            for details on setting up this ASP.NET application to support two-factor authentication using SMS.
+        </p>
+        @(Model.PhoneNumber ?? "None")
+            @if (Model.PhoneNumber != null)
+            {
+                <br />
+                <a asp-controller="Manage" asp-action="AddPhoneNumber" class="btn-bracketed">Change</a>
+                <form asp-controller="Manage" asp-action="RemovePhoneNumber" method="post">
+                    [<button type="submit" class="btn-link">Remove</button>]
+                </form>
+            }
+            else
+            {
+                <a asp-controller="Manage" asp-action="AddPhoneNumber" class="btn-bracketed">Add</a>
+            }
+    </dd>*@
+
+@*<dt>Two-Factor Authentication:</dt>
+    <dd>
+        <p>
+            There are no two-factor authentication providers configured. See <a href="http://go.microsoft.com/fwlink/?LinkID=532713">this article</a>
+            for setting up this application to support two-factor authentication.
+        </p>
+        @if (Model.TwoFactor)
+            {
+                <form asp-controller="Manage" asp-action="DisableTwoFactorAuthentication" method="post" class="form-horizontal">
+                    Enabled <button type="submit" class="btn-link btn-bracketed">Disable</button>
+                </form>
+            }
+            else
+            {
+                <form asp-controller="Manage" asp-action="EnableTwoFactorAuthentication" method="post" class="form-horizontal">
+                    <button type="submit" class="btn-link btn-bracketed">Enable</button> Disabled
+                </form>
+            }
+    </dd>*@

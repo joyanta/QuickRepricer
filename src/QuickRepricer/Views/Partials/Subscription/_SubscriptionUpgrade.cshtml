@@ -1,0 +1,38 @@
+﻿@inject SignInManager<ApplicationUser> SignInManager
+@inject UserManager<ApplicationUser> UserManager
+@model Plan
+
+@if (SignInManager.IsSignedIn(User))
+{
+    var user = await UserManager.FindByNameAsync(User.Identity.Name);
+
+    @if (user.PlanId.HasValue)
+    {
+        if (Model.Id == user.PlanId)
+        {
+            <a class="btn bwaves-effect waves-light btn orange disabled" 
+               asp-area="" asp-controller="Subscription" 
+               asp-action="Billing" asp-route-planId="@Model.Id">Subscribed</a>
+        }
+        else
+        {
+            <a class="btn bwaves-effect waves-light btn orange" asp-area="" 
+               asp-controller="Subscription" 
+               asp-action="Billing" 
+               asp-route-planId="@Model.Id">Enroll</a>
+        }
+    }
+    else
+    {
+        <a class="btn bwaves-effect waves-light btn orange" 
+           asp-area="" asp-controller="Subscription" 
+           asp-action="Billing" asp-route-planId="@Model.Id">Buy</a>
+    }
+}
+else
+{
+    
+    <a class="btn bwaves-effect waves-light btn orange"
+       asp-area="" asp-controller="Account" 
+       asp-action="Register">Start Free Trial</a>
+}

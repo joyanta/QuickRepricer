@@ -1,0 +1,8 @@
+{
+  "profiles": {
+    "QuickRepricer.Mws": {
+      "commandName": "Project",
+      "commandLineArgs": "subscribe"
+    }
+  }
+}

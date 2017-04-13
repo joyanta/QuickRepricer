@@ -1,0 +1,8 @@
+{
+  "profiles": {
+    "QuickRepricer.Publisher": {
+      "commandName": "Project",
+      "commandLineArgs": "repriced-event"
+    }
+  }
+}

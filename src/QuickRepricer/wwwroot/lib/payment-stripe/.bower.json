@@ -1,0 +1,15 @@
+{
+  "name": "payment",
+  "version": "2.1.1",
+  "main": "dist/payment.js",
+  "homepage": "https://github.com/bartlomiejwereszczynski/payment",
+  "_release": "2.1.1",
+  "_resolution": {
+    "type": "version",
+    "tag": "2.1.1",
+    "commit": "4ea2354bc4f6b648457f74689ca6494acc41c277"
+  },
+  "_source": "https://github.com/bartlomiejwereszczynski/payment.git",
+  "_target": "~2.1.1",
+  "_originalSource": "payment-stripe"
+}

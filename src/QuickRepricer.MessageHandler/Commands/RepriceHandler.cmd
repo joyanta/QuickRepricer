@@ -1,0 +1,4 @@
+cd ..
+dotnet run reprice
+
+

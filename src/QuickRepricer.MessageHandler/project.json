@@ -1,0 +1,36 @@
+{
+  "version": "1.0.0-*",
+  "buildOptions": {
+    "emitEntryPoint": true
+  },
+
+  "dependencies": {
+    //"Microsoft.NETCore.App": {
+    //  "type": "platform",
+    //  "version": "1.0.1"
+    //},
+    "QuickRepricer.Integration": "1.0.0-*",
+    "QuickRepricer.Messages": "1.0.0-*",
+    "QuickRepricer.Messaging": "1.0.0-*",
+    "Microsoft.Extensions.DependencyInjection": "1.0.0",
+    "Microsoft.Extensions.Configuration": "1.0.0",
+    "Microsoft.Extensions.Configuration.Json": "1.0.0",
+    "Microsoft.Extensions.Configuration.EnvironmentVariables": "1.0.0",
+    "Microsoft.Extensions.Configuration.UserSecrets": "1.0.0"
+
+  },
+
+  //"frameworks": {
+  //  "netcoreapp1.0": {
+  //    "imports": "dnxcore50"
+  //  }
+  //},
+
+  "frameworks": {
+    "net462": {
+    }
+  },
+
+
+  "userSecretsId": "aspnet-QuickRepricer.MessageHandler-20161017064236"
+}

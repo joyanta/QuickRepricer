@@ -1,0 +1,140 @@
+﻿@model QuickRepricer.Core.ViewModels.DashboardViewModels.DashboardIndexViewModel
+
+@{
+    ViewData["Title"] = "Dashboard";
+}
+
+<div class="container">
+    
+    <div class="row">
+        <div class="col s12 m6 l6">
+            <h3>Dashboard</h3>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col s12 m5 l5">
+            <form method="post" asp-controller="Dashboard"
+                  asp-action="Subscribe" asp-route-returnurl="@ViewData["ReturnUrl"]" role="form">
+                <span asp-validation-summary="ModelOnly"></span>
+                <div asp-validation-summary="All"></div>
+                <div class="row">
+                    <div class="input-field col s12">
+                        <i class="material-icons prefix">account_circle</i>
+                        <input id="icon_prefix" type="text" class="validate" asp-for="MerchantId" />
+                        <label for="icon_prefix" asp-for="MerchantId">MerchantId</label>
+                        <span asp-validation-for="MerchantId"></span>
+                    </div>
+                    <div class="input-field col s12">
+                        <i class="material-icons prefix">account_circle</i>
+                        <input id="icon_prefix" type="text" class="validate" asp-for="MarketPlaceId" />
+                        <label for="icon_prefix" asp-for="MarketPlaceId">MarketPlaceId</label>
+                        <span asp-validation-for="MarketPlaceId"></span>
+                    </div>
+                    <div class="input-field col s12">
+                        <i class="material-icons prefix">account_circle</i>
+                        <input id="icon_prefix" type="text" class="validate" asp-for="MwsAuthToken" />
+                        <label for="icon_prefix" asp-for="MwsAuthToken">MwsAuthToken</label>
+                        <span asp-validation-for="MwsAuthToken"></span>
+                    </div>
+                </div>
+                <div>
+                    <button class="btn waves-effect waves-light green" type="submit">
+                        Subscribe
+                        <i class="material-icons right">send</i>
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col s12 m5 l5">
+            <form method="post" asp-controller="Dashboard"
+                  asp-action="Unsubscribe" asp-route-returnurl="@ViewData["ReturnUrl"]" role="form">
+                <div>
+                    <button class="btn waves-effect waves-light green" type="submit">
+                        Unsubscribe
+                        <i class="material-icons right">send</i>
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+
+</div>
+
+@section scripts {
+    @*<script type="text/javascript">
+
+        var trialEndDate = undefined;
+        if ('@ViewData.ContainsKey("TrialEndDate")' == "True") {
+            trialEndDate = '@ViewData["TrialEndDate"]';
+        }
+
+        var trailDaysLeft = undefined;
+        if ('@ViewData.ContainsKey("TrailDaysLeft")' == "True") {
+            trailDaysLeft = '@ViewData["TrailDaysLeft"]';
+        }
+
+        var trialExpired = undefined;
+        if ('@ViewData.ContainsKey("TrialExpired")' == "True") {
+            trialExpired = '@ViewData["TrialExpired"]';
+        }
+
+        var subscriptionEndDate = undefined;
+        if ('@ViewData.ContainsKey("SubscriptionEnded")' == "True") {
+            subscriptionEndDate = '@ViewData["SubscriptionEnded"]';
+        }
+
+        var subscriptionStatus = getSubscriptionStatus(trialEndDate,
+                trailDaysLeft, trialExpired, subscriptionEndDate);
+
+        if (subscriptionStatus != null) {
+            if (Cookies.get('shownSubscriptionStatusAlready') == undefined) {
+                toast(subscriptionStatus);
+                Cookies.set('shownSubscriptionStatusAlready', 'Yes', {
+                    expires: 0.25
+                });
+            }
+        }
+
+    </script>*@
+
+    <script type="text/javascript">
+        $(document).ready(function () {
+            var trialEndDate = undefined;
+            if ('@ViewData.ContainsKey("TrialEndDate")' == "True") {
+                trialEndDate = '@ViewData["TrialEndDate"]';
+            }
+
+            var trailDaysLeft = undefined;
+            if ('@ViewData.ContainsKey("TrailDaysLeft")' == "True") {
+                trailDaysLeft = '@ViewData["TrailDaysLeft"]';
+            }
+
+            var trialExpired = undefined;
+            if ('@ViewData.ContainsKey("TrialExpired")' == "True") {
+                trialExpired = '@ViewData["TrialExpired"]';
+            }
+
+            var subscriptionEndDate = undefined;
+            if ('@ViewData.ContainsKey("SubscriptionEnded")' == "True") {
+                subscriptionEndDate = '@ViewData["SubscriptionEnded"]';
+            }
+
+            var subscriptionStatus = SubscriptionController.getSubscriptionStatus(trialEndDate,
+                    trailDaysLeft, trialExpired, subscriptionEndDate);
+
+            if (subscriptionStatus != null) {
+                if (Cookies.get('shownSubscriptionStatusAlready') == undefined) {
+                    UtilityController.toast(subscriptionStatus);
+                    Cookies.set('shownSubscriptionStatusAlready', 'Yes', {
+                        expires: 0.25
+                    });
+                }
+            }
+        });
+    </script>
+}
+
+

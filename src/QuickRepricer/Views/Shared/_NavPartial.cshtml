@@ -1,0 +1,24 @@
+﻿@inject SignInManager<ApplicationUser> SignInManager
+<li><a class="waves-effect" asp-area="" asp-controller="App" asp-action="About">About</a></li>
+<li><a class="waves-effect" asp-area="" asp-controller="App" asp-action="Blog">Blog</a></li>
+<li><a class="waves-effect" asp-area="" asp-controller="App" asp-action="Contact">Contact</a></li>
+
+@if (SignInManager.IsSignedIn(User))
+{
+    <li>
+        <a asp-area="" asp-controller="Subscription" asp-action="Index">
+            <div class="chip orange white-text">
+                <span class="white-text">Upgrade</span>
+            </div>
+        </a>
+    </li>
+    <li>
+        <a class="waves-effect" asp-area="" asp-controller="Dashboard" asp-action="Index">Dashboard</a>
+    </li>
+}
+else
+{
+    <li>
+        <a asp-area="" asp-controller="Subscription" asp-action="Index">Pricing</a>
+    </li>
+}
